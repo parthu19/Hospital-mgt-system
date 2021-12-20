@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>View doctor</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <h1>View Doctor</h1>
+        <a th:href="@{/doctors}">Back to Doctor List</a>
+        <br/><br/>
+        <div th:if="${doctor}">
+            <table border="0">
+                <tr>
+                    <td>Doctor ID</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.doctorId}">...</td>          
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.name}">...</td>             
+                </tr>
+                <tr>
+                    <td>Contact No</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.contanctNo}">...</td>              
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.email}">...</td>
+                </tr>
+                <tr>
+                    <td>Speciality</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.speciality}">...</td>
+                </tr>
+                <tr>
+                    <td>Photo</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.photo}">...</td>
+                </tr>
+                <tr>
+                    <td>ID Photo</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.idProof}">...</td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>:</td>
+                    <td th:utext="${doctor.userName}">...</td>
+                </tr>
+            
+            </table>
+            <br/><br/>
+            <div th:if="not ${allowDelete}">
+                <a th:href="@{/doctors/{doctorId}/edit(doctorId=${doctor.doctorId})}">Edit</a> |
+            </div>
+            <form th:if="${allowDelete}" th:action="@{/doctors/{doctorId}/delete(doctorId=${doctor.doctorId})}" method="POST">
+                Delete this doctor? <input type="submit" th:value="Yes" />
+            </form>
+        </div>
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />        
+    </body>
+</html>

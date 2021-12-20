@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Doctor List</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<h1>Doctors List</h1>
+
+	<div>
+		<nobr>
+			<a th:href="@{/doctors/add}">Add Doctor</a> | <a th:href="@{/}">Back
+				to Index</a>
+		</nobr>
+	</div>
+	<br />
+	<br />
+	<div>
+		<table border="1">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Contact No</th>
+				<th>Email</th>
+				<th>Speciality</th>
+				<th>Photo</th>
+				<th>ID Photo</th>
+				<th>Username</th>
+				<th>Action</th>
+				
+			</tr>
+			<tr th:each="doctor : ${doctors}">
+				<td th:utext="${doctor.doctorId}"></td>
+				<td th:utext="${doctor.name}"></td>
+				<td th:utext="${doctor.contanctNo}"></td>
+				<td th:utext="${doctor.email}"></td>
+				<td th:utext="${doctor.speciality}"></td>
+				<td th:utext="${doctor.photo}"></td>
+				<td th:utext="${doctor.idProof}"></td>
+				<td th:utext="${doctor.userName}"></td>
+				<td><a th:href="@{/doctors/{doctorId}/edit(doctorId=${doctor.doctorId})}">Edit</a>
+					<a th:href="@{/doctors/{doctorId}/delete(doctorId=${doctor.doctorId})}">Delete</a>
+				</td>
+				
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<div>
+		<nobr>
+			<span th:if="${hasPrev}"><a th:href="@{/doctors?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span> <span
+				th:if="${hasNext}"><a th:href="@{/doctors?page={next}(next=${next})}">Next</a></span>
+		</nobr>
+	</div>
+</body>
+</html>
